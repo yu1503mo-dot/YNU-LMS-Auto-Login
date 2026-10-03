@@ -1,7 +1,7 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
+# from selenium.webdriver.chrome.service import Service
 import time
-import pandas as pd
+# import pandas as pd
 from selenium.webdriver.common.by import By
 
 

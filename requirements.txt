@@ -1,0 +1,4 @@
+selenium
+keyring
+pywin32
+pyperclip
