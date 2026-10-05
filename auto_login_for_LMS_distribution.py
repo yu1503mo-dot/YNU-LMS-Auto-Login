@@ -122,31 +122,50 @@ if match:
 
     print("認証コード:", code)
     print("クリップボードへコピーしました")
+    from selenium.webdriver.common.by import By
+    #テキストに入力
+
+    element = browser.find_element(By.ID, 'idToken1')
+    copied_text=pyperclip.paste()
+    element.send_keys(copied_text)
+
+
+
+
+
+
+
+
+    #入力した値でログインを実行
+    browser_from = browser.find_element(By.NAME, 'callback_1')  
+    time.sleep(3)
+    browser_from.click()
+    print("ログインの実行")
 else:
     print("認証コードが見つかりません")
 
 
 
 
-from selenium.webdriver.common.by import By
-#テキストに入力
+# from selenium.webdriver.common.by import By
+# #テキストに入力
 
-element = browser.find_element(By.ID, 'idToken1')
-copied_text=pyperclip.paste()
-element.send_keys(copied_text)
-
-
+# element = browser.find_element(By.ID, 'idToken1')
+# copied_text=pyperclip.paste()
+# element.send_keys(copied_text)
 
 
 
 
 
 
-#入力した値でログインを実行
-browser_from = browser.find_element(By.NAME, 'callback_1')  
-time.sleep(3)
-browser_from.click()
-print("ログインの実行")
+
+
+# #入力した値でログインを実行
+# browser_from = browser.find_element(By.NAME, 'callback_1')  
+# time.sleep(3)
+# browser_from.click()
+# print("ログインの実行")
 
 
 
