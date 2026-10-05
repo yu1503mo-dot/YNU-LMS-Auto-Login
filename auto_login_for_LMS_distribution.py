@@ -3,7 +3,8 @@ from selenium import webdriver
 import time
 # import pandas as pd
 from selenium.webdriver.common.by import By
-
+import os
+from selenium.webdriver.edge.options import Options
 
 import keyring
 
@@ -27,7 +28,7 @@ USERNAME = keyring.get_password(
 
 if USERNAME is None:
     raise RuntimeError(
-        "Windows資格情報からパスワードを取得できませんでした"
+        "Windows資格情報からユーザー名を取得できませんでした"
     )
 
 #print(USERNAME)
@@ -35,7 +36,17 @@ if USERNAME is None:
 USER=USERNAME
 PASS=PASSWORD
 
-browser = webdriver.Chrome()
+# edge_user_data = os.path.expandvars(
+#     r"%LOCALAPPDATA%\Microsoft\Edge\User Data"
+# )
+
+# options = Options()
+# options.add_argument(f"--user-data-dir={edge_user_data}")
+# options.add_argument("--profile-directory=Default")
+
+# browser = webdriver.Edge(options=options)
+browser = webdriver.Edge()
+#browser = webdriver.Chrome()
 browser.implicitly_wait(3)
 
 #ログインしたいページへ転移
