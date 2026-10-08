@@ -122,38 +122,75 @@ items = inbox.Items
 items.Sort("[ReceivedTime]", True)
 mail = items.Item(1)
 
-body = mail.Body
-match = re.search(r"\d{8}", body)
+is_auth_mail = "認証コード送信" in mail.Subject
+auth_elements = browser.find_elements(By.ID, 'idToken1')
 
-if match:
-    code = match.group(0)
+if auth_elements and auth_elements[0].is_displayed():
+    print("認証コード入力欄が表示されています")
+    if is_auth_mail:
+        match = re.search(r"\d{8}", mail.Body)
+        if match:
+            code = match.group(0)
 
-    # クリップボードへコピー
-    pyperclip.copy(code)
+            # クリップボードへコピー
+            pyperclip.copy(code)
 
-    print("認証コード:", code)
-    print("クリップボードへコピーしました")
-    from selenium.webdriver.common.by import By
-    #テキストに入力
+            print("認証コード:", code)
+            print("クリップボードへコピーしました")
 
-    element = browser.find_element(By.ID, 'idToken1')
-    copied_text=pyperclip.paste()
-    element.send_keys(copied_text)
+            # テキストに入力
+            element = browser.find_element(By.ID, 'idToken1')
+            copied_text = pyperclip.paste()
+            element.send_keys(copied_text)
 
-
-
-
-
-
-
-
-    #入力した値でログインを実行
-    browser_from = browser.find_element(By.NAME, 'callback_1')  
-    time.sleep(3)
-    browser_from.click()
-    print("ログインの実行")
+            # 入力した値でログインを実行
+            browser_from = browser.find_element(By.NAME, 'callback_1')  
+            time.sleep(3)
+            browser_from.click()
+            print("ログインの実行")
+        else:
+            print("認証メールですが、本文から8桁のコードが見つかりませんでした")
+    else:
+        print(f"最新メール（件名: {mail.Subject}）は認証メールではありませんでした")
 else:
-    print("認証コードが見つかりません")
+    print("2段階認証画面は表示されていません（学内アクセス等によりログイン完了）")
+
+
+
+# body = mail.Body
+# match = re.search(r"\d{8}", body)
+
+# is_auth_mail = "認証コード送信" in mail.Subject
+
+# if match and is_auth_mail:
+#     code = match.group(0)
+
+#     # クリップボードへコピー
+#     pyperclip.copy(code)
+
+#     print("認証コード:", code)
+#     print("クリップボードへコピーしました")
+#     from selenium.webdriver.common.by import By
+#     #テキストに入力
+
+#     element = browser.find_element(By.ID, 'idToken1')
+#     copied_text=pyperclip.paste()
+#     element.send_keys(copied_text)
+
+
+
+
+
+
+
+
+#     #入力した値でログインを実行
+#     browser_from = browser.find_element(By.NAME, 'callback_1')  
+#     time.sleep(3)
+#     browser_from.click()
+#     print("ログインの実行")
+# else:
+#     print("認証コードが見つかりません")
 
 
 
