@@ -94,6 +94,13 @@ python -m pip install -r requirements.txt
 ```powershell
 python set_up_for_autolog_LMS.py
 ```
+これで実行できればよいですが、もしもユーザーIDとパスワードを入力したあとに、エラーが出てしまった場合はおそらく管理者の権限が必要になっていることが原因なので
+set_up_for_autolog_LMS.pyのパスをコピーして（set_up_for_autolog_LMS.pyを右クリック）、ターミナル（管理者）から以下のように実行してください。
+
+```powershell
+python "コピーしたパス"
+```
+
 
 画面の案内に従って、大学のユーザーIDとパスワードを入力してください。
 
